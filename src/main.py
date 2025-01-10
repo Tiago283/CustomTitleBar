@@ -10,6 +10,10 @@ def main(page: ft.Page):
     page.padding = 2
 
     #! Defaut Actions
+    def minimize(e):
+        page.window.minimized = not page.window.minimized
+        page.update()
+
     def maximize(e):
         page.window.maximized = not page.window.maximized
         page.update()
@@ -28,6 +32,7 @@ def main(page: ft.Page):
             ), ## Leading
             ft.Row(
                 [
+                    ft.IconButton(ft.Icons.REMOVE, on_click=minimize), ## Minimize button
                     ft.IconButton(ft.Icons.SQUARE_OUTLINED, on_click=maximize), ## Maximize button
                     ft.IconButton(ft.Icons.CLOSE, on_click=close) ## Close button
                 ]
