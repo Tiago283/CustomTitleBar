@@ -15,6 +15,8 @@ A simple Flet application demonstrating how to create a custom title bar with wi
 
 ## How to run the application
 
+Use the following commands:
+
 1. Install the dependencies:
 
 ```bash
