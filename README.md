@@ -21,7 +21,7 @@ A simple Flet application demonstrating how to create a custom title bar with wi
     pip install -r requirements.txt
 ```
 
-2. Run the app using the following command:
+1. Run the app using the following command:
 
 ```cmd
     flet run
