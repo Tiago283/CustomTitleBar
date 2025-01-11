@@ -1,24 +1,27 @@
-import flet as ft
+from flet import WindowDragArea, Container, Page, app
+from flet import Image, Text, Row, Icons
+from flet import IconButton, Padding, Colors
+from flet import MainAxisAlignment, CrossAxisAlignment
 
 # Custom title bar class
-class TitleBar(ft.WindowDragArea):
+class TitleBar(WindowDragArea):
     def __init__(self, actions: list | None = None):
         self.actions = actions
-        self.icon = ft.Image('icon.png', width=25, height=25)  # Icon for title bar
-        self.title = ft.Text("Flet")  # Title text
+        self.icon = Image('icon.png', width=25, height=25)  # Icon for title bar
+        self.title = Text("Flet")  # Title text
         # Container for icon, title, and actions
-        self.bar = ft.Container(
-            ft.Row([
-                ft.Row([self.icon, self.title], ft.MainAxisAlignment.START),  # Left: Icon and title
-                ft.Row(self.actions, ft.MainAxisAlignment.END)  # Right: Action buttons
-            ], ft.MainAxisAlignment.SPACE_BETWEEN, ft.CrossAxisAlignment.CENTER),  # Layout
-            bgcolor=ft.Colors.BLUE,  # Background color
-            padding=ft.Padding(1, 1, 1, 1)  # Padding for the bar
+        self.bar = Container(
+            Row([
+                Row([self.icon, self.title], MainAxisAlignment.START),  # Left: Icon and title
+                Row(self.actions, MainAxisAlignment.END)  # Right: Action buttons
+            ], MainAxisAlignment.SPACE_BETWEEN, CrossAxisAlignment.CENTER),  # Layout
+            bgcolor=Colors.BLUE,  # Background color
+            padding=Padding(1, 1, 1, 1)  # Padding for the bar
         )
         super().__init__(content=self.bar)  # Initialize draggable area
 
 # Main app logic
-def main(page: ft.Page):
+def main(page: Page):
     page.window.title_bar_buttons_hidden = True  # Hide default buttons
     page.window.title_bar_hidden = True  # Hide default title bar
     page.padding = 0  # Set page padding
@@ -30,13 +33,13 @@ def main(page: ft.Page):
 
     # Add custom title bar
     title_bar = TitleBar([
-        ft.IconButton(ft.Icons.REMOVE, on_click=minimize),
-        ft.IconButton(ft.Icons.SQUARE_OUTLINED, on_click=maximize),
-        ft.IconButton(ft.Icons.CLOSE, on_click=close)
+        IconButton(Icons.REMOVE, on_click=minimize),
+        IconButton(Icons.SQUARE_OUTLINED, on_click=maximize),
+        IconButton(Icons.CLOSE, on_click=close)
     ])
     page.add(title_bar)  # Add to page
     page.update()  # Refresh page
 
 # Start the app
 if __name__ == '__main__':
-    ft.app(main, assets_dir='assets')  # Run app with assets directory
+    app(main, assets_dir='assets')  # Run app with assets directory
