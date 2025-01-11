@@ -1,50 +1,42 @@
 import flet as ft
 
-# Custom Title Bar Control
+# Custom title bar class
 class TitleBar(ft.WindowDragArea):
     def __init__(self, actions: list | None = None):
         self.actions = actions
-        self.icon = ft.Image('icon.png', width=25, height=25)  # Icon for the title bar
+        self.icon = ft.Image('icon.png', width=25, height=25)  # Icon for title bar
         self.title = ft.Text("Flet")  # Title text
+        # Container for icon, title, and actions
         self.bar = ft.Container(
             ft.Row([
-                ft.Row([self.icon, self.title], ft.MainAxisAlignment.START),  # Left section: Icon and title
-                ft.Row(self.actions, ft.MainAxisAlignment.END)  # Right section: Action buttons
-            ], ft.MainAxisAlignment.SPACE_BETWEEN, ft.CrossAxisAlignment.CENTER)  # Layout adjustments
+                ft.Row([self.icon, self.title], ft.MainAxisAlignment.START),  # Left: Icon and title
+                ft.Row(self.actions, ft.MainAxisAlignment.END)  # Right: Action buttons
+            ], ft.MainAxisAlignment.SPACE_BETWEEN, ft.CrossAxisAlignment.CENTER),  # Layout
+            bgcolor=ft.Colors.BLUE,  # Background color
+            padding=ft.Padding(1, 1, 1, 1)  # Padding for the bar
         )
-        super().__init__(content=self.bar)  # Initialize the draggable area with the custom bar
+        super().__init__(content=self.bar)  # Initialize draggable area
 
-# Main application logic
+# Main app logic
 def main(page: ft.Page):
-    # Window configuration
-    page.window.title_bar_buttons_hidden = True  # Hide default title bar buttons
-    page.window.title_bar_hidden = True  # Hide the default title bar entirely
-    page.padding = 2  # Optional padding for the page content
+    page.window.title_bar_buttons_hidden = True  # Hide default buttons
+    page.window.title_bar_hidden = True  # Hide default title bar
+    page.padding = 0  # Set page padding
 
-    # Functions for window actions
-    def minimize(e):
-        """Toggle window minimized state."""
-        page.window.minimized = not page.window.minimized
-        page.update()
+    # Window action functions
+    def minimize(e): page.window.minimized = not page.window.minimized; page.update()
+    def maximize(e): page.window.maximized = not page.window.maximized; page.update()
+    def close(e): page.window.destroy()
 
-    def maximize(e):
-        """Toggle window maximized state."""
-        page.window.maximized = not page.window.maximized
-        page.update()
-
-    def close(e):
-        """Close the application window."""
-        page.window.destroy()
-
-    # Add the custom title bar
+    # Add custom title bar
     title_bar = TitleBar([
-        ft.IconButton(ft.Icons.REMOVE, on_click=minimize),  # Minimize button
-        ft.IconButton(ft.Icons.SQUARE_OUTLINED, on_click=maximize),  # Maximize/restore button
-        ft.IconButton(ft.Icons.CLOSE, on_click=close)  # Close button
+        ft.IconButton(ft.Icons.REMOVE, on_click=minimize),
+        ft.IconButton(ft.Icons.SQUARE_OUTLINED, on_click=maximize),
+        ft.IconButton(ft.Icons.CLOSE, on_click=close)
     ])
-    page.add(title_bar)  # Add the title bar to the page
-    page.update()  # Update the page to reflect changes
+    page.add(title_bar)  # Add to page
+    page.update()  # Refresh page
 
-# Entry point for the application
+# Start the app
 if __name__ == '__main__':
-    ft.app(main, assets_dir='assets')  # Run the application with the specified assets directory
+    ft.app(main, assets_dir='assets')  # Run app with assets directory

@@ -1,14 +1,14 @@
 [project]
-name = "custom title bar"
-version = "0.1.0"
-description = "A Custom Title Bar"
-readme = "README.md"
-requires-python = ">=3.8"
+name = "custom title bar"  # Project name
+version = "0.1.0"  # Project version
+description = "A Custom Title Bar"  # Project description
+readme = "README.md"  # Path to the readme file
+requires-python = ">=3.8"  # Minimum Python version required
 dependencies = [
-  "flet==0.25.0"
+  "flet==0.25.0"  # The version of Flet used in the project
 ]
 
-product = "Custom Title Bar"
+product = "Custom Title Bar"  # Name of the product
 
 [tool.flet.app]
-path = "src"
+path = "src"  # Directory where the app's source code is located
