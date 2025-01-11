@@ -35,4 +35,4 @@ You can customize the appearance of the title bar, including the icon, title, ba
 
 ## License
 
-This project is open-source and available under the MIT License.
+This project is open-source.
